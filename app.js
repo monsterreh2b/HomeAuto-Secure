@@ -1,27 +1,15 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-app.js";
+// Import the initialized auth object from firebase-config.js
+import { auth } from "./firebase-config"; // This imports the auth object that you initialized in firebase-config.js
+
+// Import Firebase SDKs for required functionalities
 import {
-  getAuth,
   signInWithEmailAndPassword,
   signOut,
   sendPasswordResetEmail,
   onAuthStateChanged,
 } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-auth.js";
 
-// 🔹 Firebase Configuration (Replace with Your Own)
-const firebaseConfig = {
-  apiKey: "AIzaSyC6bxcU0nGOCt7duD9yFulWsxbUcjY-OQY",
-  authDomain: "homeauto-b4281.firebaseapp.com",
-  projectId: "homeauto-b4281",
-  storageBucket: "homeauto-b4281.firebasestorage.app",
-  messagingSenderId: "740975531203",
-  appId: "1:740975531203:web:03fe474d73fa250a427e76",
-};
-
-// 🔥 Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-
-// 🔹 Select UI Elements
+// Select DOM elements
 const emailInput = document.getElementById("email");
 const passwordInput = document.getElementById("password");
 const loginBtn = document.getElementById("loginBtn");
@@ -67,7 +55,6 @@ resetBtn.addEventListener("click", () => {
 // 🔹 Check Authentication State
 onAuthStateChanged(auth, (user) => {
   if (user) {
-    // Only allow access if Firestore rules allow it (based on the email in the rules)
     messageBox.innerText = "You are logged in as " + user.email;
     showLogoutButton();
   } else {
