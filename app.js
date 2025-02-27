@@ -1,6 +1,6 @@
 // Import the initialized auth object from firebase-config.js
 import { auth } from "./firebase-config.js"; // This imports the auth object that you initialized in firebase-config.js
-
+import { onAuthStateChanged } from "firebase/auth";
 // Import Firebase SDKs for required functionalities
 import {
   signInWithEmailAndPassword,
@@ -23,9 +23,10 @@ loginBtn.addEventListener("click", () => {
   const password = passwordInput.value;
 
   signInWithEmailAndPassword(auth, email, password)
-    .then(() => {
-      messageBox.innerText = "Login Successful!";
-      showLogoutButton();
+    .then((userCredential) => {
+      const user = userCredential.user; // Get the logged-in user
+      messageBox.innerText = `Login Successful! Welcome, ${user.email}`;
+      showLogoutButton(); // Make sure to show the logout button
     })
     .catch((error) => {
       messageBox.innerText = "Login Failed: " + error.message;
@@ -34,10 +35,14 @@ loginBtn.addEventListener("click", () => {
 
 // 🔐 Logout Function
 logoutBtn.addEventListener("click", () => {
-  signOut(auth).then(() => {
-    messageBox.innerText = "Logged Out!";
-    hideLogoutButton();
-  });
+  signOut(auth)
+    .then(() => {
+      messageBox.innerText = "Logged Out!";
+      hideLogoutButton();
+    })
+    .catch((error) => {
+      messageBox.innerText = "Error during logout: " + error.message;
+    });
 });
 
 // 🔑 Password Reset
