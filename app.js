@@ -1,5 +1,5 @@
 // Import the initialized auth object from firebase-config.js
-import { auth } from "./firebase-config"; // This imports the auth object that you initialized in firebase-config.js
+import { auth } from "./firebase-config.js"; // This imports the auth object that you initialized in firebase-config.js
 
 // Import Firebase SDKs for required functionalities
 import {
