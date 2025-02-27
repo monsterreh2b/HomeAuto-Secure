@@ -62,6 +62,8 @@ onAuthStateChanged(auth, (user) => {
   if (user) {
     messageBox.innerText = "You are logged in as " + user.email;
     showLogoutButton();
+    // Redirect to the dashboard page
+    window.location.href = "dashboard.html"; // Redirect to the new page after login
   } else {
     hideLogoutButton();
     messageBox.innerText = "Please log in.";
