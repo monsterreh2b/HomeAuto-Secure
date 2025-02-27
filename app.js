@@ -1,6 +1,5 @@
 // Import the initialized auth object from firebase-config.js
 import { auth } from "./firebase-config.js"; // This imports the auth object that you initialized in firebase-config.js
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-auth.js";
 
 // Import Firebase SDKs for required functionalities
 import {
