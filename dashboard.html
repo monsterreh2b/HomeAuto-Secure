@@ -10,5 +10,27 @@
   <body>
     <h1>Welcome to Your Dashboard!</h1>
     <p>You are logged in. This is your personalized dashboard page.</p>
+
+    <!-- Logout Button -->
+    <button id="logoutBtn">Logout</button>
+
+    <script src="https://www.gstatic.com/firebasejs/11.3.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.3.1/firebase-auth.js"></script>
+    <script type="module">
+      import { auth } from "./firebase-config.js"; // Make sure this path is correct
+      import { signOut } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-auth.js"; // Firebase sign-out function
+
+      // Handle Logout
+      document.getElementById("logoutBtn").addEventListener("click", () => {
+        signOut(auth)
+          .then(() => {
+            // Redirect to the login page (index.html) after logout
+            window.location.href = "index.html";
+          })
+          .catch((error) => {
+            console.error("Error logging out: ", error);
+          });
+      });
+    </script>
   </body>
 </html>
